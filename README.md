@@ -52,9 +52,7 @@ IndexError:
 
 filename not provided after opswat.py in the command prompt
 
-##Ubuntu Specific
-
-### Requests Error
+### Ubuntu Requests Error
 
 The request package should already be installed on Ubuntu
 
