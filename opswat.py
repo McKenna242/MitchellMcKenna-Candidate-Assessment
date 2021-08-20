@@ -3,6 +3,7 @@ from functions import Functions
 
 def main():
 
+    #grabbing the filename
     fileName = sys.argv[1]
     #hashing the file
     hashNum = (Functions.hashFile(fileName))
