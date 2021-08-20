@@ -42,7 +42,7 @@ To use the program enter
 
 python3 opswat.py yourfilename.extension 
 
-### Requests
+### If Requests Error
 
 The request package should already be installed on Ubuntu
 
