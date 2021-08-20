@@ -42,7 +42,19 @@ To use the program enter
 
 python3 opswat.py yourfilename.extension 
 
-### If Requests Error
+# Common Errors 
+
+FileNotFoundError: 
+
+Path to the file or filename was entered incorrectly
+
+IndexError:
+
+filename not provided after opswat.py in the command prompt
+
+##Ubuntu Specific
+
+### Requests Error
 
 The request package should already be installed on Ubuntu
 
