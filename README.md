@@ -12,7 +12,9 @@ In the powershell terminal within VSCode type the command:
 
 pip install -r requirements.txt
 
-At the top of the functions.py file there is a global API key, change the text to your API key
+Open the functions.py file
+
+Replace 'your key here' for your API key in line 8 for the global API KEY 
 
 ### Operation
 
@@ -26,4 +28,30 @@ python opswat.py yourfilename.extension
 
 ### Installation
 
+Navigate to the folder containing the files downloaded from git
+
+Open the functions.py file
+
+Replace 'your key here' for your API key in line 8 for the global API KEY 
+
 ### Operation
+
+Open the terminal and navigate to your file location or open the terminal in your file location
+
+To use the program enter
+
+python3 opswat.py yourfilename.extension 
+
+### Requests
+
+The request package should already be installed on Ubuntu
+
+If an error arrises from it you can enter 
+
+sudo apt install python3-pip
+
+this will install pip then you can enter
+
+pip install -r requirements.txt 
+
+to install the requirements 
