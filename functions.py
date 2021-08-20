@@ -13,7 +13,7 @@ class Functions:
     #function to hash the file name using md5
     def hashFile(fileName):
                 
-        #read in 64kb chunks
+        #read in 64kb chunks to preserve memory
         BUF_SIZE = 65536 
         
         md5 = hashlib.md5()
@@ -40,12 +40,16 @@ class Functions:
         
         response = requests.request("GET", url, headers=headers)
 
+        #if found in cache sends the data to be displayed in console
         if(response.status_code == 200):    
             print("Found in cache")
             Functions.printData(response)
+        #if not found main will direct to scanFile
         else:
-            print("Uploading")            
+            print("Uploading")      
+            
     #function to upload and scan the file
+    #retrieves the data_id and calls fetchFile with it
     def scanFile(fileName):
         
         url = "https://api.metadefender.com/v4/file"
@@ -61,7 +65,8 @@ class Functions:
         responseDict = response.json()
         Functions.fetchFile(responseDict['data_id'])
     
-    #checks status of file upload, once it's 100% print results
+    #polls the file every 2 seconds checking the upload progress
+    #once it's 100% it will call printData and print the scan results
     def fetchFile(dataID):
         url = "https://api.metadefender.com/v4/file/"+dataID
         headers = {
@@ -75,21 +80,22 @@ class Functions:
         
         if(response.status_code == 200):
 
+            #if progress is 100% inform the user and call printData
             if(fileDict['scan_results']['progress_percentage'] == 100):
-                #print(response.text)
                 print("Scan Complete, progress: 100%")
                 Functions.printData(response)
+            #print current progress, wait 2 seconds, poll again
             else:
                 progress = 0
                 if(fileDict['scan_results']['progress_percentage']):
                     progress = fileDict['scan_results']['progress_percentage']
-                print("In Queue, progress: " + str(progress) + "%")
+                print("Scanning, progress: " + str(progress) + "%")
                 #print(response.text)
                 time.sleep(2)
                 Functions.fetchFile(dataID)
-                
+       
+        #prints error code and message then exits
         else:
-            #prints error code and message then exits
             print("Fetch File Error: ", response.status_code, ":", response.json()['error']['messages'][0])
             exit()
 
@@ -118,4 +124,4 @@ class Functions:
             print("def_time: " + value['def_time'])
             
         print("END")            
-        exit()
+        exit() 
